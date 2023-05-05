@@ -19,8 +19,7 @@ var lasttdsvalue = 0;
 var waterquality = null;
 var lastconsumed = null;
 
-
-$.get(`${Sensor_URL}/sensor-data`)
+$.get(`${Sensor_URL}/send-data/sensor-data`)
   .then(response => {
     response.forEach(device => {
 
@@ -58,7 +57,7 @@ let timevalue = [];
 let loadcellvalue = [];
 let tdsvalue = [];
 
-$.get(`${Sensor_URL}/sensor-data`)
+$.get(`${Sensor_URL}/send-data/sensor-data`)
   .then(response => {
     response.forEach(device => {
       xArray.push(device.date);
