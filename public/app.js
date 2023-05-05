@@ -1,4 +1,4 @@
-const Sensor_URL = 'http://localhost:5000/send-data';
+const Sensor_URL = 'https://sensordata1.onrender.com';
 
 $('#loginbutton').on('click', () => {
   const username = $('#username').val();
