@@ -1,4 +1,4 @@
-const Sensor_URL = 'https://5a94-14-99-57-10.in.ngrok.io';
+const Sensor_URL = 'http://localhost:5000/send-data';
 
 $('#loginbutton').on('click', () => {
   const username = $('#username').val();
