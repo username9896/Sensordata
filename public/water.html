@@ -12,37 +12,25 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>   
 </head>
-
-<script>
-    function ScrollToGraph(){
-        var functionDiv = document.getElementById("my-plot");
-        functionDiv.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-    }
-</script>
 
 <body>
     <div class="water-header">
         <h2 class="logo">ACTIVESENSE</h2>
-        <nav class="water-navbar">
-            <ul>
-                <li><a href="/protected">Home</a></li>
-                <li><a href="#" onclick="ScrollToGraph()">Statistics</a></li>
-                <li><a href="#">About</a></li>
-            </ul>
-        </nav>
+        <button id="return-button">Home</button>
     </div>
     <div class="water-background">
-        <h1 class="water-title">LIQUIDANALYTICS</h1>
+        <div class="water-box">
             <div class="water-info">
-                <ul>
-                    <li><strong>Water level: <p class="fetch-data" id="water-remaining"></p></strong></li>
-                    <li><strong>Water TDS level: <p class="fetch-data" id="water-quality"></p></strong></li>
-                    <li><strong>Quality feedback: <p class="fetch-data" id="water-feedback"></p></strong></li>
-                    <li><strong>Current Status: <p class="fetch-data" id="last-consumed"></p></strong></li>
+                <ul class="water-prop">
+                    <li><strong>Water level: <p id="water-remaining"></p></strong></li>
+                    <li><strong>Water TDS level: <p id="water-quality"></p></strong></li>
+                    <li><strong>Quality feedback: <p id="water-quality1"></p></strong></li>
+                    <li><strong>Current Status: <p id="last-consumed"></p></strong></li>
                 </ul>
             </div>
+        </div>
 
         <div class="graph-container">
             <div id='my-plot'></div>
@@ -52,9 +40,9 @@
             <table id="send-sensordata" class="table" style="color: #fcfdf8;">
                 <thead>
                     <tr>
-                        <th id="light">Sensor Data</th>
-                        <th id="light">Load cell data</th>
-                        <th id="light">Date</th>
+                        <th id="send-sensordata">Sensor Data</th>
+                        <th id="send-sensordata1">Load cell data</th>
+                        <th id="send-sensordata2">Date</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -69,77 +57,53 @@
     <label for="water-level-input">Set water level:</label>
     <input type="text" min="0" max="100" value="10" class="water-level-input"> -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Staatliches&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Staatliches&display=swap');
 
         .water-header {
             background-color: #142126;
             z-index: 1;
             display: flex;
             justify-content: space-between;
-            padding-bottom: 8px;
+            padding: 8px;
+            position: fixed;
             width: 100%;
-            font-family: 'Staatliches', cursive;
         }
 
         .logo {
-            margin-top: 8px;
-            margin-bottom: 0px;
-            margin-left: 8px;
             font-size: 40px;
             color: #fcfdf8;
-            user-select: none;
+            font-family: 'Staatliches', cursive;
         }
 
-        .water-navbar ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        .water-navbar li {
-            margin-top: 8px;
-            float: left;
-            margin-right: 20px;
-        }
-
-        .water-navbar li a {
-            display: block;
+        #return-button {
+            margin-bottom: 2px;
+            margin-top: 2px;
+            padding-left: 20px;
+            padding-right: 20px;
+            background: #142126;
+            border-width: 2px;
+            border-color: white;
             color: #fcfdf8;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease-in-out;
+            box-shadow: 1px;
         }
 
-        .water-navbar li a:hover {
-            background-color: #fcfdf8;
+        #return-button:hover {
+            background: #fcfdf8;
             color: #142126;
         }
-        
+
         .water-background {
-            background: url(../../../images/water.jpg);
+            background: url(https://images.unsplash.com/photo-1616556425595-93db848a50c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGElMjBnbGFzcyUyMG9mJTIwd2F0ZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60);
             height: 100%;
             overflow: auto;
             width: 100%;
             background-size: cover;
-            background-position: center;
             position: fixed;
             background-repeat: no-repeat;
             z-index: 0;
         }
 
-        .water-title{
-            text-align: center;
-            margin-top: 50px;
-            font-family: 'Staatliches', cursive;
-            font-size: 40px;
-            letter-spacing: 2px;
-            padding: 8px;
-        }
-
-        /* .water-box {
+        .water-box {
             position: absolute;
             top: 50%;
             left: 1.5%;
@@ -148,46 +112,46 @@
             height: 400px;
             border: 1px solid #fcfdf8;
             backdrop-filter: blur(5px);
-        } */
-
-        .water-info {
-            position: relative;
-            backdrop-filter: blur(8px);
-            padding: 0;
-            z-index: 2;
         }
 
-        .water-info ul{
+        .water-info {
+            position: absolute;
+            top: 50%;
+            left: 74.5%;
+            transform: translate(-50%, -50%);
+            height: 400px;
+            width: 1000px;
+            border: 1px solid #fcfdf8;
+            backdrop-filter: blur(12px);
+        }
+
+        .water-prop {
+            position: absolute;
+            /* margin: 0px -20px; */
             color: #fcfdf8;
             list-style-type: none;
             font-size: 24px;
             font-family: 'Staatliches', cursive;
-            backdrop-filter: blur(8px);
-            border: 1px solid #fcfdf8;
-            margin: 20px;
         }
 
-        .water-info li {
-            padding: 8px;
-            border: 1px solid transparent;
-            margin: 12px;
+        .water-prop li {
+            padding-right: 500px;
+            padding-left: 90px;
+            margin-bottom: 25px;
+            margin-top: 9px;
+            border: 1px;
         }
 
-        .water-info li:hover {
+        .water-prop li:hover {
             background: #142126;
             transition: ease-in 0.5s;
             border: 0.5px solid #fcfdf8;
         }
 
-        .fetch-data{
-            display: inline;
-            font-family: 'Oswald', cursive;
-        }
-
         .graph-container {
             width: 100%;
-            max-width: 140vh;
-            margin: 100px auto;
+            max-width: 1200px;
+            margin: 700px auto;
             padding: 20px;
             box-sizing: border-box;
             border: 1px solid #ccc;
@@ -197,9 +161,7 @@
         thead {
             color: #fcfdf8;
         }
-        
     </style>
-
     <script src="app.js"></script>
 </body>
 
