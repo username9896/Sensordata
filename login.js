@@ -8,6 +8,8 @@ mongoose.connect('mongodb+srv://vicky4830:vicky111@cluster0.lmsnl7w.mongodb.net/
 const mqtt = require('mqtt');
 const bodyParser = require('body-parser');
 const Logindata = require('./models/device1');
+const swaggerjsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 const base = `${__dirname}/public`;
 const app = express();
@@ -16,7 +18,6 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
-
 }));
 
 const port = 5000;
@@ -26,6 +27,30 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Active Sense",
+      version: "0.1.0",
+    },
+    servers: [
+      {
+        url: "https://sensordata1.onrender.com",
+      },
+    ],
+  },
+  apis: ["./public/*.js"],
+};
+
+const specs = swaggerjsdoc(options);
+
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(specs)
+);
 
 app.get('/', (req, res) => {
   res.sendFile(`${base}/water.html`);
