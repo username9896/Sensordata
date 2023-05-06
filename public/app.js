@@ -1,3 +1,35 @@
+/**
+* @swagger
+* components:
+*   schema:
+*     sensor-data:
+*       type: object
+*       properties:
+*         data:
+*           type: string
+*         date:
+*           type: string
+*           format: date-time
+*         loadcelldata:
+*           type: string
+* 
+ * @swagger
+ * /send-data/sensor-data:
+ *  get:
+ *      title: Sensor Data API's
+ *      summary: To get the sensor data
+ *      description: This api is used for fetching the data from MongoDB
+ *      responses:
+ *          200:
+ *              description: Successfully loaded the data
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: array
+ *                          items:
+ *                              $ref: '#components/schema/sensor-data'
+ */
+
 const Sensor_URL = 'https://sensordata1.onrender.com';
 
 $('#loginbutton').on('click', () => {
