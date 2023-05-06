@@ -1,4 +1,36 @@
-const Sensor_URL = 'http://localhost:5000/send-data';
+/**
+* @swagger
+* components:
+*   schema:
+*     sensor-data:
+*       type: object
+*       properties:
+*         data:
+*           type: string
+*         date:
+*           type: string
+*           format: date-time
+*         loadcelldata:
+*           type: string
+* 
+ * @swagger
+ * /send-data/sensor-data:
+ *  get:
+ *      title: Sensor Data API's
+ *      summary: To get the sensor data
+ *      description: This api is used for fetching the data from MongoDB
+ *      responses:
+ *          200:
+ *              description: Successfully loaded the data
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: array
+ *                          items:
+ *                              $ref: '#components/schema/sensor-data'
+ */
+
+const Sensor_URL = 'https://sensordata1.onrender.com';
 
 $('#loginbutton').on('click', () => {
   const username = $('#username').val();
@@ -19,8 +51,7 @@ var lasttdsvalue = 0;
 var waterquality = null;
 var lastconsumed = null;
 
-
-$.get(`${Sensor_URL}/sensor-data`)
+$.get(`${Sensor_URL}/send-data/sensor-data`)
   .then(response => {
     response.forEach(device => {
 
@@ -58,7 +89,7 @@ let timevalue = [];
 let loadcellvalue = [];
 let tdsvalue = [];
 
-$.get(`${Sensor_URL}/sensor-data`)
+$.get(`${Sensor_URL}/send-data/sensor-data`)
   .then(response => {
     response.forEach(device => {
       xArray.push(device.date);
